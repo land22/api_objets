@@ -7,6 +7,7 @@ const dotenv = require('dotenv').config();
 
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const path = require('path');
 app.use(bodyParser.json());
 
 mongoose.connect(process.env.LINK,
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 });
+app.use('/images', express.static(path.join(__dirname,'images')));
 
 app.use('/api/stuff', stuffRoutes);
 
